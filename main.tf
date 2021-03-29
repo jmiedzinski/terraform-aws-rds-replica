@@ -1,6 +1,6 @@
 module "label" {
-  # source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  #source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
   enabled    = "${var.enabled}"
   namespace  = "${var.namespace}"
   name       = "${var.name}"
@@ -11,8 +11,8 @@ module "label" {
 }
 
 module "final_snapshot_label" {
-  # source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  #source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
   enabled    = "${var.enabled}"
   namespace  = "${var.namespace}"
   name       = "${var.name}"
