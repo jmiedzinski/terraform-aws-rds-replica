@@ -1,5 +1,6 @@
 module "label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  # source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
   enabled    = "${var.enabled}"
   namespace  = "${var.namespace}"
   name       = "${var.name}"
@@ -10,7 +11,8 @@ module "label" {
 }
 
 module "final_snapshot_label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  # source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
+  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
   enabled    = "${var.enabled}"
   namespace  = "${var.namespace}"
   name       = "${var.name}"
@@ -40,7 +42,7 @@ resource "aws_db_instance" "default" {
   port                        = "${var.database_port}"
   instance_class              = "${var.instance_class}"
   storage_encrypted           = "${var.storage_encrypted}"
-  vpc_security_group_ids      = ["${aws_security_group.default.*.id}"]
+  vpc_security_group_ids      = "${aws_security_group.default.*.id}"
   db_subnet_group_name        = "${join("", aws_db_subnet_group.default.*.name)}"
   multi_az                    = "${var.multi_az}"
   storage_type                = "${var.storage_type}"
