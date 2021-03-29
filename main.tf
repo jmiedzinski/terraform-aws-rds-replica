@@ -1,24 +1,11 @@
 module "label" {
   source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
-  #source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
   enabled    = "${var.enabled}"
   namespace  = "${var.namespace}"
   name       = "${var.name}"
   stage      = "${var.stage}"
   delimiter  = "${var.delimiter}"
   attributes = "${var.attributes}"
-  tags       = "${var.tags}"
-}
-
-module "final_snapshot_label" {
-  source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.3.3"
-  #source     = "git::https://github.com/cloudposse/terraform-null-label.git?ref=tags/0.24.1"
-  enabled    = "${var.enabled}"
-  namespace  = "${var.namespace}"
-  name       = "${var.name}"
-  stage      = "${var.stage}"
-  delimiter  = "${var.delimiter}"
-  attributes = ["${compact(concat(var.attributes, list("final", "snapshot")))}"]
   tags       = "${var.tags}"
 }
 
@@ -32,7 +19,7 @@ resource "aws_kms_key" "default" {
 
 locals {
   enabled                   = "${var.enabled == "true"}"
-  final_snapshot_identifier = "${length(var.final_snapshot_identifier) > 0 ? var.final_snapshot_identifier : module.final_snapshot_label.id}"
+  final_snapshot_identifier = var.final_snapshot_identifier
   kms_key_id                = "${length(var.kms_key_id) > 0 ? var.kms_key_id : join("", aws_kms_key.default.*.arn)}"
 }
 
